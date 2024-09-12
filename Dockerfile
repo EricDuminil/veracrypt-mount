@@ -11,7 +11,7 @@ ARG VERACRYPT_SIG="${VERACRYPT_URL}.sig"
 # See https://veracrypt.eu/en/Digital%20Signatures.html
 ENV VERACRYPT_FINGERPRINT=5069A233D55A0EEB174A5FC3821ACD02680D16DE
 
-# Install necessary packages and VeraCrypt
+# Install necessary packages and VeraCrypt, after checking its signature.
 RUN apt-get update && \
     apt-get install -y wget gnupg && \
     wget -q ${VERACRYPT_URL} -O veracrypt.deb && \
