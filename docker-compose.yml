@@ -1,0 +1,11 @@
+services:
+  veracrypt:
+    build:
+      context: .
+    container_name: veracrypt
+    volumes:
+      - /path/to/encrypted-file:/encrypted-file
+      - decrypted:/decrypted
+
+volumes:
+  decrypted:

@@ -1,10 +1,13 @@
-# Use the appropriate base image for your container
-FROM debian:bullseye-slim
+ARG DEBIAN_VERSION=12
+ARG VERACRYPT_VERSION=1.16.14
+
+FROM debian:$DEBIAN_VERSION-slim
+
 
 # Install necessary packages and VeraCrypt
 RUN apt-get update && \
     apt-get install -y wget gnupg && \
-    wget -q https://launchpad.net/veracrypt/trunk/1.24-update7/+download/veracrypt-1.24-Update7-Debian-11-amd64.deb -O veracrypt.deb && \
+    wget -q https://launchpad.net/veracrypt/trunk/$VERACRYPT_VERSION/+download/veracrypt-$VERACRYPT_VERSION-Debian-$DEBIAN_VERSION-amd64.deb -O veracrypt.deb && \
     wget -q https://www.idrix.fr/VeraCrypt/VeraCrypt_PGP_public_key.asc -O veracrypt.asc && \
     gpg --import veracrypt.asc && \
     gpg --verify veracrypt.deb && \
