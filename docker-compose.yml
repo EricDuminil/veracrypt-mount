@@ -4,8 +4,10 @@ services:
       context: .
     container_name: veracrypt
     volumes:
-      - /path/to/encrypted-file:/encrypted-file
+      - ./test.vc:/encrypted-file
       - decrypted:/decrypted
+    env_file:
+      - .env
 
 volumes:
   decrypted:
