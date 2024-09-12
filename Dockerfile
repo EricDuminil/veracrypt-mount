@@ -10,6 +10,7 @@ ARG VERACRYPT_URL="https://launchpad.net/veracrypt/trunk/${VERACRYPT_VERSION}/+d
 ARG VERACRYPT_SIG="${VERACRYPT_URL}.sig"
 
 # Install necessary packages and VeraCrypt
+# Leave veracrypt.asc for checking
 RUN apt-get update && \
     apt-get install -y wget gnupg && \
     wget -q ${VERACRYPT_URL} -O veracrypt.deb && \
@@ -18,7 +19,7 @@ RUN apt-get update && \
     gpg --import veracrypt.asc && \
     gpg --verify veracrypt.sig veracrypt.deb && \
     apt-get install ./veracrypt.deb -y --no-install-recommends && \
-    rm -f veracrypt.deb veracrypt.asc veracrypt.sig && \
+    rm -f veracrypt.deb veracrypt.sig && \
     apt-get autoremove --purge -y wget gnupg && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
