@@ -27,6 +27,7 @@ create_container:   ## Create container
 	#TODO: Make sure it doesn't exist yet!
 	#TODO: Size as param
 	#TODO: Password either ask or from secret?
+	# https://www.reddit.com/r/VeraCrypt/comments/11urugn/help_needed_failed_to_set_up_loop_device_error/
 	@echo "${orange}Create Veracrypt container${no_color}"
 	docker compose run --rm --cap-add SYS_ADMIN --entrypoint=/bin/bash veracrypt -c "cat /dev/urandom | base64 | head -c 500 > random.txt; \
 		veracrypt --text --create vctest.vc --size 20M --password MySuperSecurePassword1! --volume-type normal --encryption AES --hash sha-512 --filesystem ext4 --pim 0 --keyfiles '' --random-source random.txt; \
