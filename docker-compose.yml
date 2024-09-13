@@ -4,6 +4,7 @@ services:
       context: .
     container_name: veracrypt
     volumes:
+      # https://arcanecode.com/2021/06/21/veracrypt-on-the-command-line-for-ubuntu-linux/
       - ./test.vc:/encrypted-file
       - decrypted:/decrypted
     env_file:
