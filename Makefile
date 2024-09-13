@@ -23,6 +23,18 @@ random_text:   ## Create random text
 	@echo "${green}Random.txt${no_color}"
 	docker compose run --rm --entrypoint=/bin/bash veracrypt -c "cat /dev/urandom | base64 | head -c 500"
 
+create_container:   ## Create container
+	#TODO: Make sure it doesn't exist yet!
+	#TODO: Size as param
+	#TODO: Password either ask or from secret?
+	@echo "${orange}Create Veracrypt container${no_color}"
+	docker compose run --rm --entrypoint=/bin/bash veracrypt -c "cat /dev/urandom | base64 | head -c 500 > random.txt; \
+		veracrypt --text --create vctest.vc --size 20M --password MySuperSecurePassword1! --volume-type normal --encryption AES --hash sha-512 --filesystem ext4 --pim 0 --keyfiles '' --random-source random.txt; \
+		ls -l vctest.vc"
+
+#TODO: create_veracrypt_container
+#TODO: mount container
+
 status: ## Show current status.
 	@docker compose ps --all | \
 		sed "s/\b\(exited\)\b/${orange}\U\1\E${no_color}/gi" | \
