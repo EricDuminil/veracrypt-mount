@@ -19,6 +19,10 @@ down:   ## Stop containers and discard them.
 	@echo "${green}Stop container${no_color}"
 	docker compose down
 
+random_text:   ## Create random text
+	@echo "${green}Random.txt${no_color}"
+	docker compose run --rm --entrypoint=/bin/bash veracrypt -c "cat /dev/urandom | base64 | head -c 500"
+
 status: ## Show current status.
 	@docker compose ps --all | \
 		sed "s/\b\(exited\)\b/${orange}\U\1\E${no_color}/gi" | \
