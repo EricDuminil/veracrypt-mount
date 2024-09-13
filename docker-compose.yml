@@ -8,6 +8,10 @@ services:
       # https://arcanecode.com/2021/06/21/veracrypt-on-the-command-line-for-ubuntu-linux/
       - ./test.vc:/encrypted-file
       - decrypted:/decrypted
+    security_opt:
+      - apparmor:unconfined
+    devices:
+      - /dev/fuse
     env_file:
       - .env
 
